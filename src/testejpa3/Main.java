@@ -31,17 +31,13 @@ public class Main {
             n *= 10;
             long createTime = criaUsuarios(n);
 
-
-            Grupo g = (Grupo) em.createQuery("select g from Grupo g").getResultList().get(0);
-            System.out.println(g.toString());
-            System.out.println(g.getAUsuarioGrupoCollection());
-
-            Usuario u = (Usuario) em.createQuery("select u from Usuario u").getResultList().get(0);
+            EntityManager em2 = emf.createEntityManager();
+            Usuario u = (Usuario) em2.createQuery("select u from Usuario u").getResultList().get(0);
+            //em.refresh(u);
             System.out.println(u.toString());
             System.out.println(u.getAUsuarioGrupoCollection());
             System.out.println("Acho que funcionou: " + u.getAUsuarioGrupoCollection().get(0).getGrupo().getNome());
-
-            
+            em2.close();
 
             long deleteTime = removeUsuarios();
 
@@ -68,7 +64,7 @@ public class Main {
                 Usuario usuario = new Usuario("usuario_" + i, "senha");
                 em.persist(usuario);
 
-                System.out.println("Criando aUsuarioGrupo com usuario.id = " + usuario.getId() + " e grupo.id = " + grupo.getId());
+              // System.out.println("Criando aUsuarioGrupo com usuario.id = " + usuario.getId() + " e grupo.id = " + grupo.getId());
                 AUsuarioGrupo aUsuarioGrupo = new AUsuarioGrupo(usuario.getId(), grupo.getId());
                 em.persist(aUsuarioGrupo);
             }
@@ -89,8 +85,9 @@ public class Main {
         try {
             tx.begin();
             em.createQuery("delete from AUsuarioGrupo aug").executeUpdate();
-
             em.createQuery("delete from Usuario o").executeUpdate();
+            em.createQuery("delete from Grupo g").executeUpdate();
+
             tx.commit();
         } finally {
             if (tx.isActive()) {
