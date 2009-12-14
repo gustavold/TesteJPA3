@@ -29,7 +29,7 @@ public class Grupo implements Serializable {
     @Basic(optional = false)
     @Column(name = "nome")
     private String nome;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "grupo")
+    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "grupo")
     private List<AUsuarioGrupo> aUsuarioGrupoCollection;
 
     public Grupo() {
