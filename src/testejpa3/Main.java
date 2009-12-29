@@ -125,7 +125,6 @@ public class Main {
                 AUsuarioGrupo aug = new AUsuarioGrupo(u.getId(), g.getId());
                 aug.setDataInicio(new Date());
                 em2.persist(aug);
-                em2.flush();
                 tx.commit();
             } finally {
                 if (tx.isActive()) {
@@ -136,14 +135,12 @@ public class Main {
             
             /////////////////////////////////////////////////////
             if (false) return;
-            em2.clear();
+           em2.clear();
             try {
                 tx.begin();
                 Usuario u = (Usuario)((List)em2.createQuery("select u from Usuario u").getResultList()).get(0);
-                System.out.println("GGGGG: "+u.getAUsuarioGrupoCollection().toString());
-                //u.setAUsuarioGrupoCollection(null);
-                //em2.merge(u);
-                em2.refresh(u);
+               //  System.out.println("GGGG: " + u.getAUsuarioGrupoCollection());
+                //System.out.println("GGGGG: " + u.getAUsuarioGrupoCollection().toString());
                 em2.remove(u);
                 tx.commit();
             } finally {

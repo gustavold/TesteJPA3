@@ -2,15 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package testejpa3;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,17 +27,18 @@ import javax.persistence.Table;
 @Table(name = "usuario")
 @NamedQueries({@NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")})
 public class Usuario implements Serializable {
+    
     private static final long serialVersionUID = 1L;
     @Id
-    //@Basic(optional = false)
+    @Basic(optional = false)
     @Column(name = "id")
     @SequenceGenerator(name="id_do_usuario", sequenceName="usuario_id_seq")
     @GeneratedValue(strategy=GenerationType.AUTO ,generator="id_do_usuario")
     private Integer id;
-    //@Basic(optional = false)
+    @Basic(optional = false)
     @Column(name = "login")
     private String login;
-    //@Basic(optional = false)
+    @Basic(optional = false)
     @Column(name = "senha")
     private String senha;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")

@@ -17,6 +17,7 @@ import javax.persistence.*;
 @Table(name = "grupo")
 @NamedQueries({@NamedQuery(name = "Grupo.findAll", query = "SELECT g FROM Grupo g")})
 public class Grupo implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -29,7 +30,7 @@ public class Grupo implements Serializable {
     @Basic(optional = false)
     @Column(name = "nome")
     private String nome;
-    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "grupo")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "grupo")
     private List<AUsuarioGrupo> aUsuarioGrupoCollection;
 
     public Grupo() {
