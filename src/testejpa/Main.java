@@ -24,7 +24,7 @@ public class Main {
             return;
         }
 
-        if(false){
+        if(true){
             TesteAssociacaoUsuarioGrupo taug = new TesteAssociacaoUsuarioGrupo(emf);
             long createTime = taug.criaUsuarios(10);
             System.out.println("CriacaoJPA: " + 10 + " " + createTime);

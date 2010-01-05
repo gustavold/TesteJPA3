@@ -72,10 +72,9 @@ public class TesteAssociacaoUsuarioGrupo {
                 //TODO: o uso do merge tem impacto na performance?
                 u = em.merge(u);
                 //System.out.println("GGGGGGGG: " + u.getAUsuarioGrupoCollection());
-
                 //em.refresh(u);
                 em.remove(u);
-                em.flush();
+               // em.flush();
                 tx.commit();
             } finally {
                 if (tx.isActive()) {
